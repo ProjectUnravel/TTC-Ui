@@ -1,0 +1,215 @@
+:root{
+  --bg:#f6fbff;
+  --card:#ffffff;
+  --accent:#125e8a; /* adjusted primary */
+  --accent-2:#ffd166; /* warm gold */
+  --muted:#6b6b6b;
+  --radius:14px;
+  --transition:220ms cubic-bezier(.2,.9,.2,1);
+  --container:1200px;
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+html,body{font-family:var(--font-sans)}
+*{box-sizing:border-box}
+html,body{height:100%}
+.site-header{background:transparent;padding:1rem 0}
+body{margin:0;background:var(--bg);color:#0b1320;line-height:1.5}
+
+/* Navbar tweaks to match SB UI Kit */
+.navbar-brand{font-size:1.125rem;letter-spacing:.3px}
+.navbar-light .navbar-nav .nav-link{color:rgba(11,19,32,.85)}
+.navbar-light .navbar-nav .nav-link:hover{color:var(--accent)}
+
+/* Hero adjustments */
+.hero{background:linear-gradient(180deg, rgba(18,94,138,0.03), transparent 40%); border-bottom-left-radius:20px; border-bottom-right-radius:20px}
+.hero .display-5{color:var(--accent)}
+
+/* Gallery collapse styling for mobile */
+.collapse#galleryCollapse .nav-link{color:rgba(11,19,32,.85)}
+.collapse#galleryCollapse .nav-link:hover{text-decoration:underline}
+
+/* Ensure dropdown menu looks consistent */
+.dropdown-menu-end{min-width:10rem}
+
+/* Desktop: open gallery dropdown on hover for faster access */
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0.15rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .navbar .dropdown:hover > .nav-link,
+  .navbar .dropdown:hover > .dropdown-toggle {
+    color: var(--accent);
+  }
+}
+
+/* Ensure Bootstrap dropdowns appear above page content and have no pointer gap */
+.navbar .dropdown-menu { z-index: 2050; pointer-events: auto; }
+.navbar .dropdown-toggle { z-index: 2060; }
+
+/* Cards */
+.card{border-radius:12px}
+.card .card-body .card-title{font-weight:700}
+
+/* Utilities */
+.text-primary{color:var(--accent) !important}
+
+/* Assets sizing */
+.hero img{max-width:520px}
+
+/* Events page styles */
+.event-card { transition: transform 220ms var(--transition), box-shadow 220ms var(--transition); border: 1px solid rgba(16,24,40,0.04); }
+.event-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,24,40,0.08); }
+.event-card .card-img-top{ height:180px; object-fit:cover; border-top-left-radius:12px; border-top-right-radius:12px }
+
+/* Modal form tweaks */
+.modal-content { border-radius:12px }
+
+/* Small animation for buttons */
+.btn-primary { transition: transform 180ms ease, box-shadow 180ms ease }
+.btn-primary:hover { transform: translateY(-3px) }
+.container{max-width:var(--container);margin:0 auto;padding:1rem}
+
+/* Header / Nav */
+.site-header{background:transparent;padding:1rem 0}
+.nav-wrap{display:flex;align-items:center;gap:1rem;justify-content:space-between}
+.brand{font-weight:800;color:var(--accent);text-decoration:none;font-size:1.05rem;letter-spacing:.4px}
+.nav-toggle{display:none;background:none;border:0;font-weight:600;padding:.5rem}
+.main-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1rem}
+.main-nav a{color:inherit;text-decoration:none;padding:.5rem;border-radius:6px;transition:background var(--transition)}
+.main-nav a:hover{background:rgba(42,127,111,0.06)}
+.has-dropdown{position:relative}
+.main-nav .has-dropdown .dropdown{position:absolute;left:0;top:calc(100% + 6px);background:var(--card);padding:.5rem;border-radius:8px;box-shadow:0 6px 18px rgba(12,12,12,0.08);display:none}
+.main-nav .has-dropdown:hover .dropdown{display:block}
+.main-nav .has-dropdown .dropdown li{white-space:nowrap}
+
+/* Hero */
+.hero{padding:3rem 0 1rem;position:relative}
+.modern-hero{background:linear-gradient(180deg,rgba(31,111,235,0.06),transparent 40%);border-bottom-left-radius:24px;border-bottom-right-radius:24px}
+.hero-grid{display:grid;grid-template-columns:1fr 480px;gap:2rem;align-items:center}
+.hero-text h1{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 .4rem;color:var(--accent)}
+.tagline{color:var(--muted);margin:0 0 .6rem;font-weight:600}
+.hero-lead{margin:.25rem 0 1rem;color:#243447}
+.hero-art img{width:100%;height:auto;border-radius:18px;display:block;box-shadow:0 12px 40px rgba(36,52,71,0.08);transform:translateY(-6px)}
+.cta{display:flex;gap:.75rem}
+.btn{display:inline-block;padding:.7rem 1.1rem;border-radius:12px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition),box-shadow 260ms ease}
+.btn:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(31,111,235,0.08)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#2ea0ff);color:#fff}
+.btn.ghost{background:transparent;border:1px solid rgba(36,52,71,0.06);color:var(--accent)}
+
+/* Content */
+.intro{padding:2rem 0}
+.features .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+.features article{background:linear-gradient(180deg,rgba(255,255,255,0.9),var(--card));padding:1.2rem;border-radius:14px;box-shadow:0 10px 30px rgba(16,24,40,0.06);border:1px solid rgba(16,24,40,0.03)}
+.features article h3{margin-top:0}
+
+/* Forms */
+.form-section{padding:2rem 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+
+/* Force stacked fields for the dedicated register form */
+.register-form .form-grid { grid-template-columns: 1fr; }
+label{display:block;font-size:.95rem}
+input,textarea{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(10,10,10,0.08);margin-top:.35rem}
+.gender-field{border:0;padding:0;display:flex;gap:1rem;align-items:center}
+.required{color:var(--accent-2);margin-left:.25rem}
+.form-actions{margin-top:1rem}
+
+/* Modern registration form style (underline fields + inline errors) */
+.register-form .field { position: relative; padding: 0.5rem 0; }
+.register-form .field-label { display:block; font-size:1.125rem; color:#6b6b6b; margin-bottom:0.6rem }
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="tel"],
+.register-form input[type="date"] {
+  width:100%;
+  border:0;
+  border-bottom:1px solid #e9e9e9;
+  padding:0.5rem 2.2rem 0.55rem 0.25rem;
+  background:transparent;
+  border-radius:0;
+  outline:none;
+  font-size:0.98rem;
+  color:#243447;
+}
+.register-form input:focus { box-shadow:none; border-bottom-color:var(--accent) }
+.register-form .field-icon { position:absolute; right:0.5rem; top:1.6rem; color:#e04b4b; font-size:0.95rem; display:none }
+.register-form .field-error { color:#e04b4b; font-size:.9rem; margin-top:0.35rem; display:none }
+
+/* Ensure field-error is hidden by default site-wide */
+.field-error { display: none }
+
+/* Floating label / compact layout */
+
+.register-form .field { padding-top:10px; padding-bottom:14px }
+.register-form .field-label { position:absolute; left:0; bottom:18px; font-size:0.98rem; color:#8a99a6; transition:transform 180ms cubic-bezier(.2,.9,.2,1), font-size 180ms cubic-bezier(.2,.9,.2,1), color 180ms cubic-bezier(.2,.9,.2,1); pointer-events:none }
+.register-form .field input,
+.register-form .field select { padding-top:10px }
+.register-form .field:focus-within .field-label,
+.register-form .field.filled .field-label { transform: translateY(-170%) scale(0.92); color:var(--accent); font-size:0.82rem }
+
+/* compact the overall form spacing */
+.register-form .form-grid { gap:0.5rem }
+.register-form { width:100%; max-width:720px; margin-left:0; margin-right:auto; background: transparent; padding:1rem; border-radius:12px; }
+
+@media (max-width:900px){
+  .register-form { width:100%; }
+}
+.register-form .field-label { left:0 }
+.register-form input:invalid ~ .field-icon,
+.register-form input:invalid ~ .field-error,
+.register-form input[aria-invalid="true"] ~ .field-icon,
+.register-form input[aria-invalid="true"] ~ .field-error { display:block }
+.register-form .gender-field { display:block }
+.register-form .gender-field .field-error { display:none; margin-top:.5rem }
+
+/* Show error block for radio group if invalid */
+.register-form .gender-field.invalid .field-error { display:block }
+
+/* Adjust submit button */
+.register-form .btn-primary { padding:.75rem 1.25rem }
+
+@media (max-width: 600px){
+  .register-form .field-label{font-size:1rem}
+}
+
+/* Gallery */
+.gallery-section{padding:2rem 0}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.photo-grid figure{margin:0;background:linear-gradient(180deg,rgba(255,255,255,0.95),var(--card));border-radius:12px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform var(--transition),box-shadow var(--transition)}
+.photo-grid figure:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
+.photo-grid img{width:100%;height:180px;object-fit:cover;display:block}
+.photo-grid figcaption{padding:.7rem;font-size:.92rem;color:var(--muted)}
+
+.lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(11,12,13,0.7);z-index:999;opacity:0;pointer-events:none;transition:opacity 180ms ease}
+.lightbox[aria-hidden="false"]{opacity:1;pointer-events:auto}
+.lightbox-img{max-width:90%;max-height:75%;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6)}
+.lightbox-close{position:fixed;top:20px;right:20px;background:var(--card);border:0;border-radius:50%;width:40px;height:40px;font-size:1.4rem;cursor:pointer}
+.lightbox-caption{color:#fff;margin-top:.75rem;text-align:center}
+
+/* Videos */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.video-responsive{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px}
+.video-responsive iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(16,24,40,0.04);padding:1.25rem 0;margin-top:2rem;background:transparent}
+.footer-grid{display:grid;grid-template-columns:1fr auto auto;gap:1rem;align-items:center}
+.social a{margin-left:.5rem;color:var(--muted);text-decoration:none}
+.muted{color:var(--muted)}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .nav-toggle{display:block}
+  .main-nav{display:none;position:absolute;left:0;right:0;top:64px;background:var(--card);box-shadow:0 8px 30px rgba(12,12,12,0.06);}
+  .main-nav.open{display:block}
+  .main-nav ul{flex-direction:column;padding:1rem}
+  .main-nav .has-dropdown:hover .dropdown{display:none}
+  .main-nav .has-dropdown .dropdown{position:static;box-shadow:none;display:none}
+  .main-nav .has-dropdown.open .dropdown{display:block}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}

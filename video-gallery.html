@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Gallery — The Elect Christian Network</title>
+  <meta name="description" content="Video highlights and resources.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">Today's timothy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center position-relative">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gallery</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="galleryDropdown">
+              <li><a class="dropdown-item" href="photo-gallery.html">Photo Gallery</a></li>
+              <li><a class="dropdown-item" href="video-gallery.html">Video Gallery</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="video-gallery.html">Video Gallery</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="video-section">
+      <h1>Video Gallery</h1>
+      <p class="muted">Highlights and tutorials.</p>
+
+      <div class="video-grid">
+        <div class="video-wrap">
+          <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/YE7VzlLtp-4" title="Youth worship" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <p class="caption">Worship Highlights</p>
+        </div>
+
+        <div class="video-wrap">
+          <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/2Vv-BfVoq4g" title="Bible study" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <p class="caption">Bible Study Snippet</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+      <div class="container footer-grid">
+      <div>
+        <strong>Today's timothy</strong>
+        <p class="muted">Bible quizzes for young people and teenagers</p>
+      </div>
+      <div class="social">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">X</a>
+      </div>
+      <div class="copyright">© <span id="year4"></span> The Elect Christian Network</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Gallery — Today's Timothy</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  gap: 20px;
+}
+
+.video-grid iframe {
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="index.html">Today's timothy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center position-relative">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown">Gallery</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="photo-gallery-catelogue.html">Photo Gallery</a></li>
+            <li><a class="dropdown-item active" href="video-gallery-catelogue.html">Video Gallery</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-5">
+  <h1 id="eventTitle">Video Gallery</h1>
+  <p id="eventDescription" class="text-muted"></p>
+
+  <div id="spinner" class="text-center my-4">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <div class="video-grid" id="videoGrid"></div>
+</main>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const eventId = params.get("eventId");
+
+const titleEl = document.getElementById("eventTitle");
+const descEl = document.getElementById("eventDescription");
+const grid = document.getElementById("videoGrid");
+const spinner = document.getElementById("spinner");
+
+if (!eventId) {
+  titleEl.textContent = "No Event Selected";
+  spinner.style.display = "none";
+  throw new Error("Missing eventId");
+}
+
+// Convert normal YouTube URL to embed URL
+function toEmbedUrl(url) {
+  if (!url) return "";
+  const regExp = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+  const match = url.match(regExp);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
+async function loadEvent() {
+  const res = await fetch(`https://ttc-gateway.runasp.net/api/ttc/events/${eventId}`);
+  const data = await res.json();
+
+  if (!data.status) {
+    titleEl.textContent = "Event not found";
+    return;
+  }
+
+  titleEl.textContent = data.results.name;
+  descEl.textContent = data.results.description || "";
+}
+
+async function loadVideos() {
+  const res = await fetch(`https://ttc-gateway.runasp.net/api/ttc/events/gallery?eventId=${eventId}&mediaType=1`);
+  const data = await res.json();
+
+  spinner.style.display = "none";
+  grid.innerHTML = "";
+
+  if (!data.status || !data.results.length) {
+    grid.innerHTML = "<p>No videos available for this event.</p>";
+    return;
+  }
+
+  data.results.forEach(video => {
+    const embedUrl = toEmbedUrl(video.mediaUrl || video.imageUrl);
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = `
+      <iframe 
+        src="${embedUrl}" 
+        frameborder="0" 
+        allowfullscreen 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    `;
+
+    grid.appendChild(wrapper);
+  });
+}
+
+loadEvent();
+loadVideos();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

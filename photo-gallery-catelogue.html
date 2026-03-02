@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Past Events — Today's Timothy</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.event-card img {
+  height: 200px;
+  object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="index.html">Today's timothy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center position-relative">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown">Gallery</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="photo-gallery-catelogue.html">Photo Gallery</a></li>
+            <li><a class="dropdown-item" href="video-gallery-catelogue.html">Video Gallery</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container my-5">
+  <h1 class="mb-4">Past Events Photo Catalogue</h1>
+
+  <div class="row g-4" id="eventsContainer"></div>
+
+  <div class="text-center mt-4 d-none" id="loadingSpinner">
+    <div class="spinner-border text-primary"></div>
+  </div>
+</main>
+
+<script>
+const eventsContainer = document.getElementById("eventsContainer");
+const spinner = document.getElementById("loadingSpinner");
+
+const fallbackBanner = "assets/images/event-1.svg";
+
+async function loadPastEvents() {
+  spinner.classList.remove("d-none");
+
+  const res = await fetch("https://ttc-gateway.runasp.net/api/ttc/events/past");
+  const data = await res.json();
+
+  spinner.classList.add("d-none");
+
+  if (!data.status || !data.results.length) {
+    eventsContainer.innerHTML = "<p>No past events found.</p>";
+    return;
+  }
+
+  eventsContainer.innerHTML = "";
+
+  data.results.forEach(event => {
+    const banner = event.bannerUrl || fallbackBanner;
+
+    const col = document.createElement("div");
+    col.className = "col-md-4";
+
+    col.innerHTML = `
+      <div class="card event-card h-100 shadow-sm" style="cursor:pointer">
+        <img src="${banner}" class="card-img-top" alt="${event.name}">
+        <div class="card-body">
+          <h5 class="card-title">${event.name}</h5>
+          <p class="card-text">${event.description || ""}</p>
+          <p class="small text-muted">${event.startDate} — ${event.startTime}</p>
+        </div>
+      </div>
+    `;
+
+    col.onclick = () => {
+      window.location.href = "photo-gallery1.html?eventId=" + event.id;
+    };
+
+    eventsContainer.appendChild(col);
+  });
+}
+
+loadPastEvents();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
