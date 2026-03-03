@@ -1,149 +1,386 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Today's timothy — Home</title>
-  <meta name="description" content="Bible quizzes for young people and teenagers. Join Today's timothy to learn, connect and grow.">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-primary" href="index.html">Today's timothy</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today's Timothy</title>
+  <meta name="description" content="About The Elect Christian Network and contact information.">
 
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center position-relative">
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gallery</a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="galleryDropdown">
-              <li><a class="dropdown-item" href="photo-gallery-catelogue.html">Photo Gallery</a></li>
-              <li><a class="dropdown-item" href="video-gallery-catelogue.html">Video Gallery</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About / Contact</a></li>
-        </ul>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #121212; 
+  color: #fff;
+}
+
+/* NAVBAR */
+.navbar {
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.navbar.scrolled {
+  background: rgba(0,0,0,0.85) !important;
+}
+.navbar.scrolled .nav-link, .navbar.scrolled .navbar-brand img {
+  color: #fff !important;
+  filter: brightness(0) invert(1);
+}
+
+/* VIDEO HERO */
+.video-hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1px; /* enable parallax */
+  perspective-origin: center;
+}
+.video-hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateZ(-1px) scale(1.1);
+  transition: transform 0.2s ease-out;
+}
+.video-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: rgba(0,0,0,0.4);  */
+  background: linear-gradient(
+    135deg,
+    rgba(13, 1, 1, 0.859) 0%,
+    rgba(203, 74, 0, 0.604) 90%,
+    rgba(49, 0, 0, 0.991) 100%
+);
+}
+
+/* CONTENT */
+.video-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.video-content h1 {
+  font-size: 4.5rem;
+  animation: fadeUp 1s ease forwards;
+}
+
+.text-carousel span {
+  display: none;
+}
+.text-carousel span.active {
+  display: inline-block;
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* REGISTER LINK */
+.register-link {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 600;
+  border: 1px solid white;
+    border-radius: 37px;
+    padding: 11px 64px;
+    text-decoration: none;
+}
+.register-link:hover {
+  color: #0a0a0a;
+  background-color: rgb(255, 255, 255);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity:1; }
+  50% { transform: scale(1.1); opacity:0.8; }
+  100% { transform: scale(1); opacity:1; }
+}
+
+/* BUTTONS */
+.control-btn {
+  position: absolute;
+  bottom: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  z-index: 3;
+}
+#muteBtn { right: 20px; }
+#playBtn { right: 80px; }
+
+/* SCROLL ARROW */
+.scroll-arrow {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: white;
+  animation: bounce 1.5s infinite;
+  z-index: 3;
+}
+@keyframes bounce {
+  0%,100%{transform:translate(-50%,0);}
+  50%{transform:translate(-50%,10px);}
+}
+
+/* SECTIONS */
+.section {
+  padding: 6rem 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-light {
+  background: #f8f9fa;
+  color: #121212;
+}
+.section-dark {
+  background: #1b1b1b;
+  color: #fff;
+}
+
+/* PARTICIPATION CARDS */
+.participation-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.participation-card {
+  background: #2c2c2c;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: #fff;
+}
+.participation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+.participation-card i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffd700;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .video-hero{height:100vh;}
+  .video-content h1{font-size:2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent py-3 fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <img src="assets/images/logo-ttc.png" alt="Today's Timothy Logo" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center position-relative">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button" data-bs-toggle="dropdown">
+            Gallery
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="photo-gallery-catelogue.html">Photo Gallery</a></li>
+            <li><a class="dropdown-item" href="video-gallery-catelogue.html">Video Gallery</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="events.html">Events</a></li>
+        <!-- <li class="nav-item"><a class="nav-link" href="about.html">About / Contact</a></li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="video-hero">
+  <video id="heroVideo"
+         muted
+         loop
+         playsinline
+         preload="none"
+         poster="assets/images/ttc-easter1.jpeg"
+         data-src="assets/media/TTC_Hero.mp4">
+  </video>
+
+  <div class="video-content">
+    <h1>Raising a Generation of</h1>
+    <div class="text-carousel h2">
+      <span class="active">Bible Champions</span>
+      <span>Faith Builders</span>
+      <span>Future Leaders</span>
+    </div>
+
+    <a href="events.html" class="register-link">Register Now</a>
+  </div>
+
+  <button class="control-btn" id="muteBtn"><i class="fa fa-volume-mute"></i></button>
+  <button class="control-btn" id="playBtn"><i class="fa fa-pause"></i></button>
+  <div class="scroll-arrow"><i class="fa fa-angle-down"></i></div>
+</section>
+
+<!-- ABOUT US -->
+<section class="section section-dark" id="about">
+  <div class="container">
+    <h2 class="text-center mb-4">About Us</h2>
+    <p>Today's Timothy is dedicated to raising young people in faith through engaging Bible quizzes, events, and fellowship. We provide safe and fun spaces for youth to learn, connect, and grow in their biblical knowledge.</p>
+  </div>
+</section>
+
+<!-- PARTICIPATION INSTRUCTIONS -->
+<section class="section section-light" id="participate">
+  <div class="container">
+    <h2 class="text-center mb-4">How to Participate</h2>
+    <div class="participation-cards">
+      <div class="participation-card">
+        <i class="fa fa-user-plus"></i>
+        <h5>Register Online</h5>
+        <p>Click the "Register Now" button and fill in your details to join the event.</p>
+      </div>
+      <div class="participation-card">
+        <i class="fa fa-people-group"></i>
+        <h5>Join Online Community</h5>
+        <p>After a successful registration, a whatsapp group link is displayed for you. Kindly click-on/copy the link to join our community</p>
+      </div>
+      <div class="participation-card">
+        <i class="fa fa-calendar-check"></i>
+        <h5>Attend Event</h5>
+        <p>Show up on the scheduled date and participate actively with peers.</p>
+      </div>
+      <div class="participation-card">
+        <i class="fa fa-smile-beam"></i>
+        <h5>Have Fun</h5>
+        <p>Learn, engage, and enjoy the event experience to the fullest!</p>
       </div>
     </div>
-  </nav>
-
-  <main>
-    <section class="hero py-5 bg-light">
-      <div class="container">
-        <div class="row align-items-center gy-4">
-          <div class="col-lg-6">
-            <h1 class="display-5 text-primary fw-bold">Today's timothy</h1>
-            <p class="lead text-muted">Engaging Bible quizzes and fellowship for young people and teenagers.</p>
-            <p class="mb-4">Grow in knowledge, faith, and community — competitions, study guides, and events designed just for youth.</p>
-            <div class="d-flex gap-3">
-              <a class="btn btn-primary btn-lg" href="register.html">Get Started</a>
-            </div>
-            <div class="mt-4 d-flex gap-4">
-              <div class="d-flex align-items-center">
-                <img src="assets/icons/icon-users.svg" width="36" height="36" alt="community icon" class="me-2">
-                <div>
-                  <strong>Community</strong>
-                  <div class="text-muted small">Events & groups</div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center">
-                <img src="assets/icons/icon-calendar.svg" width="36" height="36" alt="calendar icon" class="me-2">
-                <div>
-                  <strong>Events</strong>
-                  <div class="text-muted small">Quizzes & meetups</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 text-center">
-            <img src="assets/images/TTC-easter-edition.jpeg" alt="Youth fellowship illustration" class="img-fluid rounded-3 shadow-sm">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-5">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Quizzes</h5>
-                <p class="card-text text-muted">Interactive Bible quizzes tailored for youth and teenagers.</p>
-                <a href="register.html" class="stretched-link text-decoration-none">Join now</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Community</h5>
-                <p class="card-text text-muted">Connect with peers from churches and youth groups.</p>
-                <a href="about.html" class="stretched-link text-decoration-none">Learn more</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">Resources</h5>
-                <p class="card-text text-muted">Access study guides and event materials to prepare.</p>
-                <a href="about.html" class="stretched-link text-decoration-none">Browse resources</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="intro container">
-      <h2>Welcome</h2>
-      <p>The Elect Christian Network runs Bible quizzes and activities designed specifically for young people and teenagers. We create safe, fun, and engaging events that help participants grow in biblical knowledge and fellowship.</p>
-    </section>
-
-    <section class="features container">
-      <div class="grid">
-        <article>
-          <h3>Quizzes</h3>
-          <p>Interactive Bible quizzes tailored for youth and teenagers.</p>
-        </article>
-        <article>
-          <h3>Community</h3>
-          <p>Connect with peers from churches and youth groups.</p>
-        </article>
-        <article>
-          <h3>Resources</h3>
-          <p>Access study guides and event materials to prepare.</p>
-        </article>
-      </div>
-    </section>
-  </main>
+  </div>
+</section>
 
   <footer class="site-footer">
-    <div class="container footer-grid">
+      <div class="container footer-grid">
       <div>
         <strong>Today's timothy</strong>
         <p class="muted">Bible quizzes for young people and teenagers</p>
       </div>
       <div class="social">
-        <a href="#" aria-label="Facebook placeholder">Facebook</a>
-        <a href="#" aria-label="Instagram placeholder">Instagram</a>
-        <a href="#" aria-label="Twitter placeholder">X</a>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">X</a>
       </div>
-      <div class="copyright">© <span id="year"></span> The Elect Christian Network</div>
+      <div class="copyright">© <span id="year5"></span> The Elect Christian Network</div>
     </div>
   </footer>
+<script>
+const video = document.getElementById("heroVideo");
+const muteBtn = document.getElementById("muteBtn");
+const playBtn = document.getElementById("playBtn");
+const texts = document.querySelectorAll(".text-carousel span");
+const navbar = document.querySelector(".navbar");
+let index = 0;
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
+/* Lazy load + parallax */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const src = video.dataset.src;
+      video.src = src;
+      video.play().catch(()=>{});
+      observer.disconnect();
+    }
+  });
+});
+observer.observe(video);
+
+/* Text carousel */
+setInterval(() => {
+  texts[index].classList.remove("active");
+  index = (index + 1) % texts.length;
+  texts[index].classList.add("active");
+}, 3000);
+
+/* Mute */
+muteBtn.onclick = () => {
+  video.muted = !video.muted;
+  muteBtn.innerHTML = video.muted
+    ? '<i class="fa fa-volume-mute"></i>'
+    : '<i class="fa fa-volume-up"></i>';
+};
+
+/* Play/Pause */
+playBtn.onclick = () => {
+  if (video.paused) {
+    video.play();
+    playBtn.innerHTML = '<i class="fa fa-pause"></i>';
+  } else {
+    video.pause();
+    playBtn.innerHTML = '<i class="fa fa-play"></i>';
+  }
+};
+
+/* Scroll arrow */
+document.querySelector(".scroll-arrow").onclick = () => {
+  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+};
+
+/* Navbar fade-in + text color */
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) navbar.classList.add("scrolled");
+  else navbar.classList.remove("scrolled");
+});
+
+/* Video parallax */
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  video.style.transform = `translateY(${scrollTop * 0.2}px) scale(1.1)`;
+});
+
+/* Section fade-in */
+const sections = document.querySelectorAll(".section");
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, {threshold:0.2});
+sections.forEach(sec => sectionObserver.observe(sec));
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

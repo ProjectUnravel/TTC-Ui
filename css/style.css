@@ -3,6 +3,7 @@
   --card:#ffffff;
   --accent:#125e8a; /* adjusted primary */
   --accent-2:#ffd166; /* warm gold */
+  --required:#e04b4b; /* error red */
   --muted:#6b6b6b;
   --radius:14px;
   --transition:220ms cubic-bezier(.2,.9,.2,1);
@@ -57,7 +58,7 @@ body{margin:0;background:var(--bg);color:#0b1320;line-height:1.5}
 .text-primary{color:var(--accent) !important}
 
 /* Assets sizing */
-.hero img{max-width:520px}
+/* .hero img{max-width:520px} */
 
 /* Events page styles */
 .event-card { transition: transform 220ms var(--transition), box-shadow 220ms var(--transition); border: 1px solid rgba(16,24,40,0.04); }
@@ -114,7 +115,7 @@ body{margin:0;background:var(--bg);color:#0b1320;line-height:1.5}
 label{display:block;font-size:.95rem}
 input,textarea{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(10,10,10,0.08);margin-top:.35rem}
 .gender-field{border:0;padding:0;display:flex;gap:1rem;align-items:center}
-.required{color:var(--accent-2);margin-left:.25rem}
+.required{color:var(--required);margin-left:.25rem}
 .form-actions{margin-top:1rem}
 
 /* Modern registration form style (underline fields + inline errors) */

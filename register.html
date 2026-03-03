@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -34,7 +35,7 @@
             </ul>
           </li>
           <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About / Contact</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="about.html">About / Contact</a></li> -->
         </ul>
       </div>
     </div>
@@ -83,9 +84,9 @@
               </label>
 
               <label for="email" class="field">
-                <span class="field-label">Email address <span class="required">*</span></span>
+                <span class="field-label">Email address </span>
                 <input id="email" name="email" type="email" required placeholder=" ">
-                <span class="field-icon"><i class="fa fa-exclamation-circle"></i></span>
+                <!-- <span class="field-icon"><i class="fa fa-exclamation-circle"></i></span> -->
                 <!-- <div class="field-error" data-for="email">Please enter a valid email address.</div> -->
               </label>
 
@@ -104,7 +105,7 @@
               </label>
 
               <label for="church" class="field">
-                <span class="field-label">Church / Group <span class="required">*</span></span>
+                <span class="field-label">Church  <span class="required">*</span></span>
                 <input id="church" name="church" type="text" required placeholder=" ">
                 <span class="field-icon"><i class="fa fa-exclamation-circle"></i></span>
                 <!-- <div class="field-error" data-for="church">Please enter your church or group.</div> -->
@@ -116,7 +117,6 @@
                   <option value="">Select gender</option>
                   <option value="Female">Female</option>
                   <option value="Male">Male</option>
-                  <option value="Other">Other</option>
                 </select>
                 <span class="field-icon"><i class="fa fa-exclamation-circle"></i></span>
                 <!-- <div class="field-error" data-for="gender">Select a gender.</div> -->
@@ -174,9 +174,9 @@
   <script>
     const dobInput = document.getElementById("dob");
 
-    // Set max date = today (prevents future years)
-    const today = new Date().toISOString().split("T")[0];
-    dobInput.max = today;
+    // Set min date = today (prevents future years)
+    const today = new Date(2007, 3, 13).toISOString().split("T")[0];
+    dobInput.min = today;
 
     const submitSpinner = document.getElementById("submitSpinner");
 
@@ -307,6 +307,11 @@
         eventId: currentEventId
       };
 
+      if(!payload.firstName || !payload.lastName  || !payload.phoneNumber || !payload.church || !payload.dateOfBirth || payload.gender === undefined) {
+        showStatus("Validation Error", "Please fill in all required fields marked as (*)", false);
+        return;
+      }
+
       try {
         submitButton.disabled = true;
         showSubmitSpinner();
@@ -350,6 +355,7 @@
       statusModalBody.innerHTML = `
     <div class="alert ${success ? "alert-success" : "alert-danger"} mb-0">
       ${message}
+      <p style="padding-top:3px;"><i class="fa fa-whatsapp-square"></i>Join our <a href="https://chat.whatsapp.com/GrHfxM4WQGx381mAApq2wl?mode=gi_t" target="_blank">WhatsApp Group</a> chat via this link: </p>
     </div>
   `;
       statusModal.show();
