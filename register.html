@@ -355,7 +355,7 @@
       statusModalBody.innerHTML = `
     <div class="alert ${success ? "alert-success" : "alert-danger"} mb-0">
       ${message}
-      <p style="padding-top:3px;"><i class="fa fa-whatsapp-square"></i>Join our <a href="https://chat.whatsapp.com/GrHfxM4WQGx381mAApq2wl?mode=gi_t" target="_blank">WhatsApp Group</a> chat via this link: </p>
+    ${success ? '<p style="padding-top:3px;"><i class="fa fa-whatsapp-square"></i>Join our <a href="https://chat.whatsapp.com/GrHfxM4WQGx381mAApq2wl?mode=gi_t" target="_blank">WhatsApp Group</a> chat via this link: </p>': ''}
     </div>
   `;
       statusModal.show();
