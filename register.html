@@ -151,6 +151,22 @@
   </footer>
 
 
+  <!-- REGISTRATION CLOSED MODAL (non-dismissible) -->
+  <div class="modal fade" id="regClosedModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Registration Closed</h5>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning mb-0">
+            Registration for this event has ended. We hope to see you at the next one!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- REGISTRATION STATUS MODAL -->
   <div class="modal fade" id="statusModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -192,6 +208,11 @@
   <script>
     const EVENT_API_BASE = "https://ttc-gateway.runasp.net/api/ttc/events";
     const REGISTRATION_API = "https://ttc-gateway.runasp.net/api/ttc/eventregistrations";
+    const REGISTRATION_DEADLINE = new Date("2026-03-15T16:00:00");
+
+    function isRegistrationClosed() {
+      return new Date() > REGISTRATION_DEADLINE;
+    }
 
     const eventDetailsDiv = document.getElementById("eventDetails");
     const loadingSpinner = document.getElementById("loadingSpinner");
@@ -252,8 +273,13 @@
 
         currentEventId = data.results.id;
         renderEventCard(data.results);
-        enableSubmit();
         hideSpinner();
+
+        if (isRegistrationClosed()) {
+          new bootstrap.Modal(document.getElementById("regClosedModal")).show();
+        } else {
+          enableSubmit();
+        }
 
       } catch (err) {
         console.error(err);
@@ -355,7 +381,7 @@
       statusModalBody.innerHTML = `
     <div class="alert ${success ? "alert-success" : "alert-danger"} mb-0">
       ${message}
-    ${success ? '<p style="padding-top:3px;"><i class="fa fa-whatsapp-square"></i>Join our <a href="https://chat.whatsapp.com/GrHfxM4WQGx381mAApq2wl?mode=gi_t" target="_blank">WhatsApp Group</a> chat via this link: </p>': ''}
+    ${success ? '<p style="padding-top:3px;"><i class="fa fa-whatsapp-square"></i><a href="https://chat.whatsapp.com/GrHfxM4WQGx381mAApq2wl?mode=gi_t" target="_blank">Click here to join our WhatsApp Group chat</a> </p>': ''}
     </div>
   `;
       statusModal.show();
